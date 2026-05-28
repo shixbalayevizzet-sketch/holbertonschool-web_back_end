@@ -6,5 +6,5 @@ from typing import Tuple, Union
 
 
 def to_kv(k: str, v: Union[int, float]) -> Tuple[str, float]:
-    """k mətnini və v-nin kvadratını (float olaraq) tuple daxilində qaytarır."""
+    """k mətnini və v-nin kvadratını tuple daxilində qaytarır."""
     return (k, float(v ** 2))
