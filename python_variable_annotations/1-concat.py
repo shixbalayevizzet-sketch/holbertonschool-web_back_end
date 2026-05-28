@@ -5,5 +5,5 @@
 
 
 def concat(str1: str, str2: str) -> str:
-    """str1 və str2 mətnlərini birləşdirir və nəticəni string olaraq qaytarır."""
+    """str1 və str2 mətnlərini birləşdirir."""
     return str1 + str2
