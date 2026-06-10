@@ -1,15 +1,21 @@
 #!/usr/bin/env python3
 """
-Server modulu, məlumat bazasının səhifələnməsi üçün istifadə olunur.
+Bu modul məlumat bazasının səhifələnməsi üçün lazımi funksiyaları təmin edir.
 """
 import csv
-import math
 from typing import List, Tuple
 
 
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
     """
     Verilmiş səhifə və səhifə ölçüsü üçün başlanğıc və son indeksləri hesablayır.
+
+    Args:
+        page (int): Səhifə nömrəsi (1-dən başlayaraq).
+        page_size (int): Hər səhifədəki element sayı.
+
+    Returns:
+        Tuple[int, int]: Başlanğıc və son indeksi ehtiva edən tuple.
     """
     start_index = (page - 1) * page_size
     end_index = page * page_size
@@ -22,6 +28,7 @@ class Server:
     DATA_FILE = "Popular_Baby_Names.csv"
 
     def __init__(self):
+        """Server obyektini inisializasiya edir."""
         self.__dataset = None
 
     def dataset(self) -> List[List]:
@@ -37,21 +44,22 @@ class Server:
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """
-        Səhifə nömrəsinə və ölçüsünə görə məlumatı qaytarır.
+        Səhifə nömrəsinə və ölçüsünə görə məlumatın müvafiq səhifəsini qaytarır.
+
+        Args:
+            page (int): İstənilən səhifə nömrəsi.
+            page_size (int): Səhifədə göstəriləcək sətir sayı.
+
+        Returns:
+            List[List]: Səhifələnmiş sətirlərin siyahısı.
         """
-        # Argumanların tam ədəd və sıfırdan böyük olduğunu yoxlayırıq
         assert isinstance(page, int) and page > 0
         assert isinstance(page_size, int) and page_size > 0
 
-        # Məlumat bazasını əldə edirik
-        dataset = self.dataset()
-
-        # index_range funksiyasından istifadə edərək indeksləri alırıq
         start, end = index_range(page, page_size)
+        data = self.dataset()
 
-        # Əgər indekslər dataset-in uzunluğundan böyükdürsə, boş siyahı qaytarırıq
-        if start >= len(dataset):
+        if start >= len(data):
             return []
 
-        # Dilimlənmiş məlumatı qaytarırıq
-        return dataset[start:end]
+        return data[start:end]
