@@ -1,39 +1,22 @@
 #!/usr/bin/env python3
-"""
-Bu modul məlumat bazasının səhifələnməsi üçün lazımi funksiyaları təmin edir.
-"""
+"""Simple pagination module."""
+
 import csv
-from typing import List, Tuple
-
-
-def index_range(page: int, page_size: int) -> Tuple[int, int]:
-    """
-    Verilmiş səhifə və səhifə ölçüsü üçün başlanğıc və son indeksləri hesablayır.
-
-    Args:
-        page (int): Səhifə nömrəsi (1-dən başlayaraq).
-        page_size (int): Hər səhifədəki element sayı.
-
-    Returns:
-        Tuple[int, int]: Başlanğıc və son indeksi ehtiva edən tuple.
-    """
-    start_index = (page - 1) * page_size
-    end_index = page * page_size
-    return (start_index, end_index)
+from typing import List
+from 0-simple_helper_function import index_range
 
 
 class Server:
-    """Server class to paginate a database of popular baby names.
-    """
+    """Server class to paginate a database of popular baby names."""
+
     DATA_FILE = "Popular_Baby_Names.csv"
 
     def __init__(self):
-        """Server obyektini inisializasiya edir."""
+        """Initialize Server instance."""
         self.__dataset = None
 
     def dataset(self) -> List[List]:
-        """Cached dataset
-        """
+        """Cached dataset."""
         if self.__dataset is None:
             with open(self.DATA_FILE) as f:
                 reader = csv.reader(f)
@@ -42,24 +25,19 @@ class Server:
 
         return self.__dataset
 
-    def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-        """
-        Səhifə nömrəsinə və ölçüsünə görə məlumatın müvafiq səhifəsini qaytarır.
-
-        Args:
-            page (int): İstənilən səhifə nömrəsi.
-            page_size (int): Səhifədə göstəriləcək sətir sayı.
-
-        Returns:
-            List[List]: Səhifələnmiş sətirlərin siyahısı.
-        """
+    def get_page(
+        self,
+        page: int = 1,
+        page_size: int = 10
+    ) -> List[List]:
+        """Return a page of the dataset."""
         assert isinstance(page, int) and page > 0
         assert isinstance(page_size, int) and page_size > 0
 
         start, end = index_range(page, page_size)
-        data = self.dataset()
+        dataset = self.dataset()
 
-        if start >= len(data):
+        if start >= len(dataset):
             return []
 
-        return data[start:end]
+        return dataset[start:end]
