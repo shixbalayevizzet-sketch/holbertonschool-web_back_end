@@ -38,13 +38,6 @@ class Server:
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """
         Səhifə nömrəsinə və ölçüsünə görə məlumatı qaytarır.
-
-        Args:
-            page (int): Səhifə nömrəsi.
-            page_size (int): Hər səhifədəki sətir sayı.
-
-        Returns:
-            List[List]: Səhifələnmiş məlumatlar siyahısı.
         """
         # Argumanların tam ədəd və sıfırdan böyük olduğunu yoxlayırıq
         assert isinstance(page, int) and page > 0
