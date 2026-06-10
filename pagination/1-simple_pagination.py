@@ -19,7 +19,7 @@ class Server:
     def dataset(self) -> List[List]:
         """Return the cached dataset."""
         if self.__dataset is None:
-            with open(self.DATA_FILE) as f:
+            with open(self.DATA_FILE, 'r') as f:
                 reader = csv.reader(f)
                 dataset = [row for row in reader]
             self.__dataset = dataset[1:]
