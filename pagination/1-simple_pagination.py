@@ -3,7 +3,8 @@
 
 import csv
 from typing import List
-from 0-simple_helper_function import index_range
+
+index_range = __import__('0-simple_helper_function').index_range
 
 
 class Server:
@@ -12,7 +13,7 @@ class Server:
     DATA_FILE = "Popular_Baby_Names.csv"
 
     def __init__(self):
-        """Initialize Server instance."""
+        """Initialize server."""
         self.__dataset = None
 
     def dataset(self) -> List[List]:
@@ -30,11 +31,12 @@ class Server:
         page: int = 1,
         page_size: int = 10
     ) -> List[List]:
-        """Return a page of the dataset."""
+        """Return the requested page."""
         assert isinstance(page, int) and page > 0
         assert isinstance(page_size, int) and page_size > 0
 
         start, end = index_range(page, page_size)
+
         dataset = self.dataset()
 
         if start >= len(dataset):
