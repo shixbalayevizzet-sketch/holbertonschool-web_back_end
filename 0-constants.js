@@ -1,7 +1,15 @@
-function taskFirst() {
-  const greeting = "Hello";
-  const pi = 3.14159;
-  const user = { name: "Alice", id: 1 };
+export function taskFirst() {
+  const task = 'I prefer const when I can.';
+  return task;
+}
 
-  console.log(greeting, pi, user);
+export function getLast() {
+  return ' is okay';
+}
+
+export function taskNext() {
+  let combination = 'But sometimes let';
+  combination += getLast();
+
+  return combination;
 }
