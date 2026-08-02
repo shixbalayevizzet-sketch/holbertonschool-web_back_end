@@ -4,7 +4,7 @@ const countStudents = (dataPath) => {
   try {
     // Read the file synchronously with utf8 encoding
     const fileContent = fs.readFileSync(dataPath, 'utf-8');
-    
+
     // Split content by lines and filter out empty lines
     const lines = fileContent
       .split('\n')
