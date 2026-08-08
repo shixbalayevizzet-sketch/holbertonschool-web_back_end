@@ -11,7 +11,6 @@ const app = http.createServer(async (req, res) => {
     res.end('Hello Holberton School!');
   } else if (req.url === '/students') {
     res.write('This is the list of our students\n');
-    
     try {
       let output = '';
       const originalLog = console.log;
