@@ -8,9 +8,8 @@ class StudentsController {
       const studentGroups = await readDatabase(databasePath);
       const responseLines = ['This is the list of our students'];
 
-      // Sort fields alphabetically case-insensitive
       const sortedFields = Object.keys(studentGroups).sort(
-        (a, b) => a.locale_case_insensitive || a.toLowerCase().localeCompare(b.toLowerCase())
+        (a, b) => a.localeCompare(b),
       );
 
       sortedFields.forEach((field) => {
